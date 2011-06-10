@@ -2,10 +2,16 @@
 	# Check User Agent
 	$nocheck = isset($_GET['nocheck']);
 	$ua = $_SERVER['HTTP_USER_AGENT'];
-	$regex = '/(Version\\/5\\.[^ ]+ Safari|Chrome\\/11)/';
+	$browser = get_browser(null, true);
+	if ( ($browser['browser'] == 'Safari' && $browser['majorver'] >= 5 ) ||
+	     ($browser['browser'] == 'Chrome' && $browser['majorver'] >= 11 ) 
+	   ) {
+		// pass
+	} else {
+/*	$regex = '/(Version\\/5\\.[^ ]+ Safari|Chrome\\/11)/';
 	$result = preg_match($regex, $ua);
 	if ( !$result && !$nocheck ) {
-		header('Location: nogo.html');
+*/		header('Location: nogo.html');
 		die;
 	}
 ?>
